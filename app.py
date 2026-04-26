@@ -2138,7 +2138,10 @@ def fetch_category_groups(
 
 
 def serve_shell() -> Any:
-    html_path = Path(__file__).resolve().parent / "index.html"
+    base = Path(__file__).resolve().parent
+    html_path = base / "index.html"
+    if not html_path.exists():
+        html_path = base / "api" / "index.html"
     with open(html_path, "r", encoding="utf-8") as f:
         return f.read(), 200, {"Content-Type": "text/html; charset=utf-8"}
 
