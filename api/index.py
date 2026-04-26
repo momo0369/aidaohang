@@ -1,7 +1,12 @@
 import sys
 import os
+from pathlib import Path
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+api_dir = Path(__file__).resolve().parent
+project_dir = api_dir.parent
+sys.path.insert(0, str(project_dir))
+
+os.chdir(project_dir)
 
 from app import app
 
