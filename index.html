@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 工具导航 - 发现优质 AI 工具</title>
+  <meta name="description" content="精选各类 AI 工具，涵盖写作、绘画、编程、办公等领域，助你提升工作效率。">
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: #ffffff;
+      --text: #172033;
+      --muted: #67748c;
+      --line: rgba(23, 32, 51, 0.08);
+      --primary: #1263ff;
+      --primary-strong: #0a49bf;
+      --primary-soft: rgba(18, 99, 255, 0.1);
+      --accent: #ff8a3d;
+      --shadow: 0 22px 60px rgba(18, 34, 66, 0.12);
+      --radius: 24px;
+      --radius-sm: 18px;
+      --container: 1180px;
+      --font: "IBM Plex Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(18, 99, 255, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(255, 138, 61, 0.14), transparent 20%),
+        linear-gradient(180deg, #edf3fb 0%, #f7f9fc 38%, #f4f7fb 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .shell {
+      width: min(var(--container), calc(100vw - 24px));
+      margin: 0 auto;
+      padding: 22px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), #5ca8ff 70%, #b7d6ff 100%);
+      box-shadow: 0 12px 24px rgba(18, 99, 255, 0.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .brand-mark::before {
+      width: 18px;
+      height: 18px;
+      left: 8px;
+      top: 8px;
+    }
+
+    .brand-mark::after {
+      width: 9px;
+      height: 9px;
+      right: 8px;
+      bottom: 8px;
+    }
+
+    .brand-meta {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-meta small {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .chip strong {
+      color: var(--text);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 18px;
+      padding: 13px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--primary), #2a86ff);
+      box-shadow: 0 14px 28px rgba(18, 99, 255, 0.24);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+
+    .button-link {
+      color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: none;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(246, 249, 255, 0.84));
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(18, 99, 255, 0.16), transparent 68%);
+      top: -120px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.04;
+      max-width: 780px;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .meta-row,
+    .actions-row,
+    .tag-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .searchbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      max-width: 740px;
+      margin-top: 24px;
+    }
+
+    .searchbar input {
+      border: 1px solid rgba(23, 32, 51, 0.08);
+      border-radius: 18px;
+      padding: 15px 18px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 1px 1px rgba(12, 18, 28, 0.04);
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 24px;
+    }
+
+    .quick-nav a {
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 34px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2,
+    .section-head h3 {
+      margin: 0;
+      font-size: clamp(24px, 2.4vw, 34px);
+      line-height: 1.1;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .section-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .section-link {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .group {
+      margin-top: 20px;
+    }
+
+    .group h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: block;
+      border-radius: 22px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 28px 48px rgba(18, 34, 66, 0.16);
+    }
+
+    .card-top {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(18, 99, 255, 0.12), rgba(255, 138, 61, 0.14));
+      border: 1px solid rgba(23, 32, 51, 0.06);
+    }
+
+    .card-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .card-category {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-desc {
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 14px;
+      min-height: 3.4em;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .empty,
+    .notice,
+    .error-box {
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 18px;
+    }
+
+    .error-box {
+      color: #b42318;
+      background: rgba(255, 240, 240, 0.9);
+    }
+
+    .loading {
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 3px solid rgba(18, 99, 255, 0.14);
+      border-top-color: var(--primary);
+      animation: spin 0.9s linear infinite;
+    }
+
+    .detail-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(280px, 0.96fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .article,
+    .aside {
+      border-radius: 28px;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .article {
+      padding: 28px;
+    }
+
+    .aside {
+      padding: 22px;
+      position: sticky;
+      top: 16px;
+    }
+
+    .detail-image {
+      margin-top: 22px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(23, 32, 51, 0.08);
+      background: rgba(243, 247, 255, 0.84);
+    }
+
+    .detail-section {
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-section:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .detail-section h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+    }
+
+    .detail-section p,
+    .detail-section li {
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .detail-section ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .aside h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .footer {
+      margin-top: 36px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .detail-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .aside {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(var(--container), calc(100vw - 18px));
+        padding-top: 16px;
+      }
+
+      .hero {
+        padding: 24px;
+        border-radius: 26px;
+      }
+
+      .searchbar {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" data-nav="1">
+        <span class="brand-mark"></span>
+        <span class="brand-meta">
+          <span>AI 工具导航</span>
+          <small>发现优质 AI 工具，提升工作效率</small>
+        </span>
+      </a>
+      <div class="toolbar" id="topbar-meta">
+        <span class="chip">加载中…</span>
+      </div>
+    </header>
+
+    <main id="app">
+      <section class="loading">
+        <div class="spinner" aria-hidden="true"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      精选 AI 工具，持续更新中
+    </footer>
+  </div>
+
+  <script>
+    const appRoot = document.getElementById("app");
+    const topbarMeta = document.getElementById("topbar-meta");
+
+    function esc(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatTime(value) {
+      if (!value) {
+        return "未同步";
+      }
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return value;
+      }
+      return date.toLocaleString("zh-CN", { hour12: false });
+    }
+
+    function summarize(text, fallback = "暂无简介") {
+      const value = String(text ?? "").trim();
+      if (!value) {
+        return fallback;
+      }
+      return value;
+    }
+
+    function currentPathQuery() {
+      return `${window.location.pathname}${window.location.search}`;
+    }
+
+    function matchesAppRoute(pathname) {
+      return pathname === "/" ||
+        pathname === "/index.html" ||
+        /^\/category\/[^/]+$/.test(pathname) ||
+        /^\/sites\/[^/]+\.html$/.test(pathname);
+    }
+
+    function buildApiUrl() {
+      const pathname = window.location.pathname;
+      const search = window.location.search || "";
+      if (pathname === "/" || pathname === "/index.html") {
+        return `/api/home${search}`;
+      }
+      const categoryMatch = pathname.match(/^\/category\/([^/]+)$/);
+      if (categoryMatch) {
+        return `/api/category/${encodeURIComponent(decodeURIComponent(categoryMatch[1]))}${search}`;
+      }
+      const toolMatch = pathname.match(/^\/sites\/([^/]+)\.html$/);
+      if (toolMatch) {
+        return `/api/tools/${encodeURIComponent(decodeURIComponent(toolMatch[1]))}`;
+      }
+      return "/api/home";
+    }
+
+    function buildTopbar(payload) {
+      const stats = payload?.stats || {};
+      return `
+        <span class="chip"><strong>${esc(stats.tool_count ?? 0)}</strong> 个工具</span>
+        <span class="chip"><strong>${esc(stats.category_count ?? 0)}</strong> 个分类</span>
+      `;
+    }
+
+    function toolCard(tool) {
+      return `
+        <a class="card" href="${esc(tool.detail_path)}" data-nav="1">
+          <div class="card-top">
+            <div class="card-logo">
+              ${tool.image_url ? `<img src="${esc(tool.image_url)}" alt="${esc(tool.title)}" loading="lazy">` : ""}
+            </div>
+            <div>
+              <h3 class="card-title">${esc(tool.title)}</h3>
+              <div class="card-category">
+                ${esc(tool.main_category_title || "未分类")}
+                ${tool.subcategory_title ? ` / ${esc(tool.subcategory_title)}` : ""}
+              </div>
+            </div>
+          </div>
+          <div class="card-desc">${esc(summarize(tool.subtitle || tool.description))}</div>
+          <div class="card-actions">
+            <span class="pill">${tool.has_detail ? "查看详情" : "已收录"}</span>
+            ${tool.official_url ? `<span class="section-link">访问官网</span>` : ""}
+          </div>
+        </a>
+      `;
+    }
+
+    function categoryNav(categories) {
+      if (!categories?.length) {
+        return "";
+      }
+      return `
+        <nav class="quick-nav">
+          ${categories.map((category) => `
+            <a href="${esc(category.path)}" data-nav="1">${esc(category.title)}</a>
+          `).join("")}
+        </nav>
+      `;
+    }
+
+    function renderHome(payload) {
+      const query = payload.query || "";
+      const hero = `
+        <section class="hero">
+          <h1>发现优质 AI 工具，提升工作效率</h1>
+          <p>精选各类 AI 工具，涵盖写作、绘画、编程、办公等领域，助你快速找到合适的工具。</p>
+          <form class="searchbar" data-search-form="${esc(window.location.pathname)}">
+            <input type="search" name="q" value="${esc(query)}" placeholder="搜索工具名、简介或分类，例如：AI 写作、PPT、Midjourney">
+            <button class="button button-primary" type="submit">搜索</button>
+          </form>
+        </section>
+      `;
+
+      if (query) {
+        const searchResults = payload.search_tools || [];
+        return `
+          ${hero}
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h2>搜索结果</h2>
+                <p>共找到 ${esc(payload.search_total || 0)} 个匹配项</p>
+              </div>
+              <div class="section-links">
+                <a class="section-link" href="/" data-nav="1">清空搜索</a>
+              </div>
+            </div>
+            ${searchResults.length ? `
+              <div class="grid">${searchResults.map(toolCard).join("")}</div>
+            ` : `
+              <div class="empty">没有匹配结果，换一个关键词试试。</div>
+            `}
+          </section>
+        `;
+      }
+
+      const sections = payload.sections || [];
+      return `
+        ${hero}
+        ${categoryNav(payload.categories)}
+        ${sections.length ? sections.map((section) => `
+          <section class="section" id="${esc(section.slug)}">
+            <div class="section-head">
+              <div>
+                <h2>${esc(section.title)}</h2>
+                <p>${esc(section.total)} 个工具</p>
+              </div>
+              <div class="section-links">
+                <a class="section-link" href="${esc(section.path)}" data-nav="1">查看分类页</a>
+              </div>
+            </div>
+            ${section.groups.map((group) => `
+              <div class="group">
+                ${group.title ? `<h3>${esc(group.title)}</h3>` : ""}
+                <div class="grid">${group.tools.map(toolCard).join("")}</div>
+              </div>
+            `).join("")}
+          </section>
+        `).join("") : `
+          <div class="empty">暂无工具数据，请稍后再试。</div>
+        `}
+      `;
+    }
+
+    function renderCategory(payload) {
+      const category = payload.category;
+      const groups = payload.groups || [];
+      const query = payload.query || "";
+      return `
+        <section class="hero">
+          <div class="actions-row">
+            <a class="button button-secondary" href="/" data-nav="1">返回首页</a>
+            ${category.parent_slug ? `<span class="chip">子分类页</span>` : `<span class="chip">主分类页</span>`}
+          </div>
+          <h1>${esc(category.title)}</h1>
+          <p>浏览该分类下的所有 AI 工具，点击卡片查看详细信息。</p>
+          <form class="searchbar" data-search-form="${esc(category.path)}">
+            <input type="search" name="q" value="${esc(query)}" placeholder="在当前分类内搜索">
+            <button class="button button-primary" type="submit">筛选</button>
+          </form>
+        </section>
+        ${groups.length ? groups.map((group) => `
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h2>${esc(group.title || category.title)}</h2>
+                <p>${esc(group.tools.length)} 个工具</p>
+              </div>
+            </div>
+            <div class="grid">${group.tools.map(toolCard).join("")}</div>
+          </section>
+        `).join("") : `
+          <div class="empty">当前分类没有匹配到数据。</div>
+        `}
+      `;
+    }
+
+    function renderDetailBlock(block) {
+      if (block.kind === "paragraph") {
+        return `<p>${esc(block.text)}</p>`;
+      }
+      if (block.kind === "list") {
+        return `
+          <ul>
+            ${(block.items || []).map((item) => `
+              <li>
+                ${item.local_source_id
+                  ? `<a href="/sites/${esc(item.local_source_id)}.html" data-nav="1">${esc(item.text)}</a>`
+                  : item.url
+                    ? `<a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.text)}</a>`
+                    : esc(item.text)
+                }
+              </li>
+            `).join("")}
+          </ul>
+        `;
+      }
+      return "";
+    }
+
+    function renderTool(payload) {
+      const tool = payload.tool;
+      const related = payload.related_tools || [];
+      const sections = tool.sections || [];
+      return `
+        <section class="hero">
+          <div class="actions-row">
+            <a class="button button-secondary" href="/" data-nav="1">返回首页</a>
+            ${tool.main_category_path ? `<a class="button button-link" href="${esc(tool.main_category_path)}" data-nav="1">${esc(tool.main_category_title)}</a>` : ""}
+            ${tool.subcategory_path ? `<a class="button button-link" href="${esc(tool.subcategory_path)}" data-nav="1">${esc(tool.subcategory_title)}</a>` : ""}
+          </div>
+          <h1>${esc(tool.title)}</h1>
+          <p>${esc(summarize(tool.subtitle || tool.description, "暂无简介"))}</p>
+          <div class="tag-row">
+            ${(tool.tags || []).length
+              ? tool.tags.map((tag) => `<span class="chip">${esc(tag)}</span>`).join("")
+              : `<span class="chip">暂无标签</span>`
+            }
+          </div>
+          <div class="actions-row">
+            ${tool.official_url ? `<a class="button button-primary" href="${esc(tool.official_url)}" target="_blank" rel="noopener">访问官网</a>` : ""}
+          </div>
+          ${tool.image_url ? `
+            <div class="detail-image">
+              <img src="${esc(tool.image_url)}" alt="${esc(tool.title)}">
+            </div>
+          ` : ""}
+        </section>
+
+        <div class="detail-layout">
+          <article class="article">
+            ${(() => {
+              const skipKeywords = ["评论", "comment", "回复", "留言"];
+              const filtered = sections.filter(s => !skipKeywords.some(kw => (s.heading || "").toLowerCase().includes(kw)));
+              return filtered.length ? filtered.map((section) => `
+                <section class="detail-section">
+                  <h2>${esc(section.heading)}</h2>
+                  ${(section.blocks || []).map(renderDetailBlock).join("")}
+                </section>
+              `).join("") : `
+                <section class="detail-section">
+                  <h2>内容说明</h2>
+                  <p>暂无详细内容。</p>
+                </section>
+              `;
+            })()}
+          </article>
+
+          <aside class="aside">
+            <h3>工具信息</h3>
+            <div class="stack">
+              <div class="card">
+                <div class="muted">所属分类</div>
+                <strong>${esc(tool.main_category_title || "未分类")}</strong>
+                ${tool.subcategory_title ? `<div class="muted" style="margin-top: 6px;">${esc(tool.subcategory_title)}</div>` : ""}
+              </div>
+              ${related.length ? `
+                <div class="card">
+                  <div class="muted" style="margin-bottom: 10px;">同分类推荐</div>
+                  <div class="stack">
+                    ${related.map((item) => `
+                      <a class="card" href="${esc(item.detail_path)}" data-nav="1">
+                        <strong>${esc(item.title)}</strong>
+                        <div class="muted" style="margin-top: 8px;">${esc(summarize(item.subtitle || item.description))}</div>
+                      </a>
+                    `).join("")}
+                  </div>
+                </div>
+              ` : ""}
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    function updateChrome(payload) {
+      topbarMeta.innerHTML = buildTopbar(payload);
+      const syncButton = document.getElementById("manual-sync-btn");
+      if (syncButton) {
+        syncButton.addEventListener("click", triggerManualSync);
+      }
+
+      if (payload.view === "home") {
+        document.title = payload.query ? `搜索：${payload.query} - AI 工具站` : "AI 工具站";
+      } else if (payload.view === "category") {
+        document.title = `${payload.category.title} - AI 工具站`;
+      } else if (payload.view === "tool") {
+        document.title = `${payload.tool.title} - AI 工具站`;
+      }
+    }
+
+    function renderPayload(payload) {
+      updateChrome(payload);
+      if (payload.view === "home") {
+        appRoot.innerHTML = renderHome(payload);
+        return;
+      }
+      if (payload.view === "category") {
+        appRoot.innerHTML = renderCategory(payload);
+        return;
+      }
+      if (payload.view === "tool") {
+        appRoot.innerHTML = renderTool(payload);
+        return;
+      }
+      appRoot.innerHTML = `<div class="error-box">未知页面类型，无法渲染。</div>`;
+    }
+
+    async function fetchJson(url, options = {}) {
+      const response = await fetch(url, {
+        headers: { "Accept": "application/json" },
+        ...options,
+      });
+      const contentType = response.headers.get("content-type") || "";
+      const body = contentType.includes("application/json") ? await response.json() : null;
+      if (!response.ok) {
+        throw new Error(body?.error || `请求失败：${response.status}`);
+      }
+      return body;
+    }
+
+    async function loadRoute() {
+      appRoot.innerHTML = `
+        <section class="loading">
+          <div class="spinner" aria-hidden="true"></div>
+        </section>
+      `;
+      try {
+        const payload = await fetchJson(buildApiUrl());
+        renderPayload(payload);
+      } catch (error) {
+        appRoot.innerHTML = `
+          <div class="error-box">
+            页面加载失败：${esc(error.message || "未知错误")}
+          </div>
+        `;
+      }
+    }
+
+    async function triggerManualSync() {
+      const button = document.getElementById("manual-sync-btn");
+      if (button) {
+        button.disabled = true;
+        button.textContent = "正在提交…";
+      }
+      try {
+        await fetchJson("/api/admin/sync", { method: "POST" });
+        await loadRoute();
+      } catch (error) {
+        alert(`同步触发失败：${error.message || "未知错误"}`);
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = "立即同步";
+        }
+      }
+    }
+
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("a[href]");
+      if (!link) {
+        return;
+      }
+      if (link.target === "_blank" || link.hasAttribute("download")) {
+        return;
+      }
+      const url = new URL(link.href, window.location.origin);
+      if (url.origin !== window.location.origin) {
+        return;
+      }
+      if (!matchesAppRoute(url.pathname)) {
+        return;
+      }
+      event.preventDefault();
+      const next = `${url.pathname}${url.search}`;
+      if (next === currentPathQuery()) {
+        return;
+      }
+      history.pushState({}, "", next);
+      loadRoute();
+    });
+
+    document.addEventListener("submit", (event) => {
+      const form = event.target.closest("[data-search-form]");
+      if (!form) {
+        return;
+      }
+      event.preventDefault();
+      const targetPath = form.getAttribute("data-search-form") || "/";
+      const query = new FormData(form).get("q")?.toString().trim() || "";
+      const url = new URL(targetPath, window.location.origin);
+      if (query) {
+        url.searchParams.set("q", query);
+      } else {
+        url.searchParams.delete("q");
+      }
+      history.pushState({}, "", `${url.pathname}${url.search}`);
+      loadRoute();
+    });
+
+    window.addEventListener("popstate", loadRoute);
+    loadRoute();
+  </script>
+</body>
+</html>
