@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: aidaohang
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py serve --host 0.0.0.0 --port $PORT
+    plan: free
