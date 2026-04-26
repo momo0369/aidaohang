@@ -18,6 +18,13 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 from flask import Flask, abort, g, jsonify, render_template_string, request, send_file, url_for
 
 BASE_DIR = Path(__file__).resolve().parent
+if (BASE_DIR / "api").exists() and (BASE_DIR / "ai_tools.sqlite3").exists():
+    pass
+elif not (BASE_DIR / "ai_tools.sqlite3").exists():
+    for parent in [BASE_DIR.parent, BASE_DIR.parent.parent]:
+        if (parent / "ai_tools.sqlite3").exists():
+            BASE_DIR = parent
+            break
 DEFAULT_DB_PATH = BASE_DIR / "ai_tools.sqlite3"
 INDEX_SHELL_PATH = BASE_DIR / "index.html"
 DEFAULT_HOME_URL = os.getenv("AI_TOOLS_HOME_URL", "https://ai-bot.cn/")
